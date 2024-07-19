@@ -6,11 +6,11 @@ The official PyTorch Implementation of AnyIR for All-in-One Image Restoration
 
 #### [Bin Ren <sup>1,2</sup>](https://amazingren.github.io/), [Eduard Zamfir<sup>3</sup>](https://eduardzamfir.github.io), [Yawei Li <sup>4</sup>](https://yaweili.bitbucket.io/), [Zongwei Wu<sup>3</sup>](https://sites.google.com/view/zwwu/accueil), [Danda Pani Paudel<sup>4,5</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>3</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Nicu Sebe <sup>2</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en), and [Luc Van Gool <sup>4,5</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en)
 
-<sup>1</sup> University of Pisa, Italy,
-<sup>2</sup> University of Trento, Italy,
-<sup>3</sup> University of Würzburg, Germany,
-<sup>4</sup> ETH Zürich, Switzerland,
-<sup>5</sup> INSAIT Sofia University, Bulgaria
+<sup>1</sup> University of Pisa, Italy, <br>
+<sup>2</sup> University of Trento, Italy, <br>
+<sup>3</sup> University of Würzburg, Germany, <br>
+<sup>4</sup> ETH Zürich, Switzerland, <br>
+<sup>5</sup> INSAIT Sofia University, Bulgaria, <br>
 
 [![paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/pdf/2407.13372)
 <!-- [![project](https://img.shields.io/badge/project-page-brightgreen)](https://eduardzamfir.github.io/daair/) -->
