@@ -31,6 +31,26 @@ With the emergence of mobile devices, there is a growing demand for an efficient
 </details>
 
 
+## Installation
+
+### Environments
+```
+# Step1: Create the virtual environments via micromamba or conda:
+micromamba create -n anyir python=3.9 -y
+
+# Step2: Install Pytorch:
+pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu118
+
+# Step3: Other libs
+pip install -r requirements.txt
+
+```
+
+
+### Datasets
+
+
+
 
 ## Citation
 
