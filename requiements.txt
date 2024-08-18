@@ -1,0 +1,20 @@
+--extra-index-url https://download.pytorch.org/whl/cu118
+
+einops==0.8.0
+fvcore
+lightning==2.0.1
+lightning-cloud==0.5.32
+lightning-utilities==0.8.0
+ninja==1.11.1
+numpy==1.26.3
+opencv-python==4.7.0.68
+pandas==1.5.3
+tensorboard
+timm
+torch==2.0.0
+torchaudio==2.0.1
+torchvision==0.15.1
+triton==2.0.0
+tqdm
+wandb
+warmup_scheduler==0.3
