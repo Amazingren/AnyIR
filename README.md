@@ -19,6 +19,7 @@ The official PyTorch Implementation of AnyIR for All-in-One Image Restoration
 
 
 ## Latest
+- `08/01/2025`: Unfortunately, though this work was recommented Accept by the AC from the ACM MM2025, while the PC finally reject this work, this work is still under review. 
 - `07/18/2024`: Repository is created. Our code will be made publicly available upon acceptance. 
 
 
