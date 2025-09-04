@@ -17,7 +17,6 @@ The official PyTorch Implementation of AnyIR for All-in-One Image Restoration
 [![paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/pdf/2407.13372)
 <!-- [![project](https://img.shields.io/badge/project-page-brightgreen)](https://eduardzamfir.github.io/daair/) -->
 
-
 ## Latest
 - `08/01/2025`: Unfortunately, though this work was recommented `Accept` by the AC from the ACM MM2025, while the PC finally reject this work without reason, so this work is still under review. 
 - `07/18/2024`: Repository is created. Our code will be made publicly available upon acceptance. 
@@ -64,10 +63,10 @@ export PATH=/opt/modules/nvidia-cuda-11.8/bin:$PATH
 If you find our work helpful, please consider citing the following paper and/or ⭐ the repo.
 ```
 @misc{ren2025any,
-      title={Any Image Restoration with Efficient Automatic Degradation Adaptation}, 
-      author={Bin Ren and Eduard Zamfir and Zongwei Wu and Yawei Li and Yidi Li and Danda Pani Paudel and Radu Timofte and Ming-Hsuan Yang and Luc Van Gool and Nicu Sebe},
-      year={2024},
-      eprint={2504.14249?},
+      title={Any Image Restoration via Efficient Spatial-Frequency Degradation Adaptation},
+      author={Ren, Bin and Zamfir, Eduard and Wu, Zongwei and Li, Yawei and Li, Yidi and Paudel, Danda Pani and Timofte, Radu and Yang, Ming-Hsuan and Van Gool, Luc and Sebe, Nicu},
+      year={2025},
+      eprint={2504.14249},
       archivePrefix={arXiv},
       primaryClass={cs.CV}
 }
