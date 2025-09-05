@@ -25,3 +25,4 @@ triton==2.0.0
 tqdm
 wandb==0.18.7
 warmup_scheduler==0.3
+lpips
