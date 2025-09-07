@@ -26,3 +26,4 @@ tqdm
 wandb==0.18.7
 warmup_scheduler==0.3
 lpips
+typeguard
