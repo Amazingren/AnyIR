@@ -56,9 +56,8 @@ export PATH=/opt/modules/nvidia-cuda-11.8/bin:$PATH
 ### Datasets
 
 
-
-
 ### Training
+
 
 
 ### Evaluation:
@@ -66,9 +65,9 @@ export PATH=/opt/modules/nvidia-cuda-11.8/bin:$PATH
 
 (II). 5-Degradation Setting:
 
-(III). Mix-Degradation Setting.
+(III). Mix-Degradation Setting:
 
-(IV). Real-World Setting
+(IV). Real-World Setting:
 
 
 
