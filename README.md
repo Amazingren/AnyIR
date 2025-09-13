@@ -56,8 +56,13 @@ export PATH=/opt/modules/nvidia-cuda-11.8/bin:$PATH
 ### Datasets
 
 
-### Training
+### Checkpoints Downloads:
 
+
+### Visual Results Downloads:
+
+
+### Training
 
 
 ### Evaluation:
