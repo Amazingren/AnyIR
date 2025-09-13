@@ -58,6 +58,22 @@ export PATH=/opt/modules/nvidia-cuda-11.8/bin:$PATH
 
 
 
+### Training
+
+
+### Evaluation:
+(I). 3-Degradation Setting:
+
+(II). 5-Degradation Setting:
+
+(III). Mix-Degradation Setting.
+
+(IV). Real-World Setting
+
+
+
+
+
 ## Citation
 
 If you find our work helpful, please consider citing the following paper and/or ⭐ the repo.
