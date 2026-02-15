@@ -1,5 +1,5 @@
 """
-AnyIR: 
+AnyIR: Any Image Restoration via Efficient Spatial-Frequency Degradation Adaptation
 Author: Bin Ren
 """
 
@@ -175,7 +175,7 @@ class GatedDegradationAdaption(nn.Module):
     def __init__(
         self,
         dim: int,
-        expansion_ratio: float = 8/3,   # 与你原实现保持一致（≈2.667）
+        expansion_ratio: float = 8/3, 
         kernel_size: int = 7,
         norm_layer=nn.BatchNorm2d,
         act_layer=nn.GELU,
@@ -183,22 +183,22 @@ class GatedDegradationAdaption(nn.Module):
         eps: float = 1e-6,
     ):
         super().__init__()
-        assert expansion_ratio > 2.0, "expansion_ratio 必须 > 2 才能切出 γ、β、α 三段"
+        assert expansion_ratio > 2.0, "expansion_ratio > 2 to ensure γ、β、α"
 
         self.eps = eps
         self.norm = norm_layer(dim)
         self.act = act_layer()
 
-        # ---- W_exp：通道扩展后再 split γ、β、α
+        # ---- W_exp：expand and then split γ、β、α
         hidden = int(round(expansion_ratio * dim))
         gamma_ch = dim
         beta_ch  = dim
         alpha_ch = hidden - gamma_ch - beta_ch
-        assert alpha_ch > 0, "alpha 通道数必须 > 0，请增大 expansion_ratio"
+        assert alpha_ch > 0, "alpha channel number > 0, please enlarge expansion_ratio"
 
         self.W_exp = nn.Conv2d(dim, hidden, kernel_size=1, bias=bias)
 
-        # ---- W_depth：对 α 做 depthwise conv
+        # ---- W_depth：depthwise conv for α
         self.W_depth = nn.Conv2d(
             alpha_ch, alpha_ch,
             kernel_size=kernel_size,
@@ -207,16 +207,15 @@ class GatedDegradationAdaption(nn.Module):
             bias=bias
         )
 
-        # ---- W_gate：concat(β, α') 之后回到 C
+        # ---- W_gate：concat(β, α') and then back to C
         self.W_gate = nn.Conv2d(beta_ch + alpha_ch, dim, kernel_size=1, bias=bias)
 
-        # ---- W_proj：残差后 1×1 投影
+        # ---- W_proj：residual first and then 1×1 mapping
         self.W_proj = nn.Conv2d(dim, dim, kernel_size=1, bias=bias)
 
-        # 初始温度 τ（可学习），按通道缩放更灵活
+        # init τ(learnable)
         self.tau = nn.Parameter(torch.ones(1, dim, 1, 1))
 
-        # 保存切分索引
         self.split_indices = (gamma_ch, beta_ch, alpha_ch)
 
     def forward(self, x):
@@ -225,7 +224,7 @@ class GatedDegradationAdaption(nn.Module):
         # 1) Normalize
         F_hat = self.norm(F_in)
 
-        # 2) 每通道的空间均值/方差
+        # 2) spatial mu and var per channel
         mu = F_hat.mean(dim=(2, 3), keepdim=True)                        # [B,C,1,1]
         var = ((F_hat - mu) ** 2).mean(dim=(2, 3), keepdim=True)
         sigma = torch.sqrt(var + self.eps)
@@ -244,10 +243,11 @@ class GatedDegradationAdaption(nn.Module):
 
         # 7) α' = (α ⊗ W_depth) * (1 + τ_adj)
         alpha_dw = self.W_depth(alpha)
-        # 广播到 α 的通道数（tau_adj 是 [B,C,1,1]，只影响前 C 个通道；采用通道切片对齐 α' 规模）
-        # 简洁起见，用逐元素缩放时把 tau_adj 限制到 dim，再按需要重复/插值到 alpha 的通道数
+
+        # Broadcast to alpha channels.
+        # tau_adj: [B, C, 1, 1], only scales the first C channels.
+        # Clamp/slice to dim, then repeat or interpolate to match alpha channels if needed.
         if alpha_dw.shape[1] != tau_adj.shape[1]:
-            # 重复/裁剪以匹配 α' 的通道数
             repeat_factor = (alpha_dw.shape[1] + tau_adj.shape[1] - 1) // tau_adj.shape[1]
             tau_alpha = tau_adj.repeat(1, repeat_factor, 1, 1)[:, :alpha_dw.shape[1]]
         else:
@@ -276,12 +276,10 @@ class Attention(nn.Module):
         assert dim % 2 == 0, "dim must be even (split att/gate)"
         self.num_heads = num_heads
 
-        # 可学习的注意力温度（每个头）
         self.temperature = nn.Parameter(torch.ones(num_heads, 1, 1))
 
         half_dim = dim // 2
 
-        # 注意力分支
         self.qkv = nn.Conv2d(half_dim, half_dim * 3, kernel_size=1, bias=bias)
         self.qkv_dwconv = nn.Conv2d(
             half_dim * 3, half_dim * 3,
@@ -289,16 +287,11 @@ class Attention(nn.Module):
             groups=half_dim * 3, bias=bias
         )
 
-        # 门控卷积分支（使用你给的实现）
-        # self.gatedcnn = GatedCNNBlock(dim=half_dim, drop_path=0.1)
-
         self.gatedcnn = GatedDegradationAdaption(dim=half_dim, expansion_ratio=8/3, kernel_size=7)
 
-
-        # 融合的可学习权重 λ（Algorithm 2 第3步）
+        # Alg.2 Step3
         self.lam = nn.Parameter(torch.tensor(0.5))
 
-        # 最终输出投影
         self.project_out = nn.Conv2d(dim, dim, kernel_size=1, bias=bias)
 
     # -------------------- Algorithm 2: helpers --------------------
@@ -326,7 +319,7 @@ class Attention(nn.Module):
     # -------------------------------------------------------------
 
     def forward(self, x):
-        # 1) 拆分通道：注意力 / 门控
+        # 1) skip-split channels
         x_att = x[:, 0::2, :, :]  # even channels
         x_gate = x[:, 1::2, :, :]  # odd channels
 
@@ -452,8 +445,8 @@ class AnyIR(nn.Module):
         self,
         inp_channels=3,
         out_channels=3,
-        dim=32,
-        num_blocks=[4, 6, 6, 8],
+        dim=28,
+        num_blocks=[3, 5, 5, 7],
         num_refinement_blocks=4,
         heads=[1, 2, 4, 8],
         ffn_expansion_factor=2,
@@ -620,7 +613,7 @@ class AnyIR(nn.Module):
         return output
 
 
-# Testing code with performance metrics
+# Calculating Parameters, FLOPs, Memory
 if __name__ == "__main__":
     # Create model instance
     model = AnyIR(
