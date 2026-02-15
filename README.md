@@ -3,9 +3,9 @@
 
 The official PyTorch Implementation of AnyIR for All-in-One Image Restoration
 
-#### [Bin Ren <sup>1,2</sup>](https://amazingren.github.io/)$^\star$, [Eduard Zamfir<sup>4</sup>](https://eduardzamfir.github.io), [Zongwei Wu<sup>4</sup>](https://sites.google.com/view/zwwu/accueil), [Yawei Li<sup>4</sup>](https://yaweili.bitbucket.io/)$^\dagger$, [Yidi Li<sup>3</sup>](https://liyidi.github.io/), [Danda Pani Paudel<sup>3</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>4</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang <sup>7</sup>](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool <sup>3</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), and [Nicu Sebe <sup>2</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
+#### [Bin Ren <sup>1,2</sup>](https://amazingren.github.io/)$^\star$, [Eduard Zamfir<sup>4</sup>](https://eduardzamfir.github.io), [Zongwei Wu<sup>4</sup>](https://sites.google.com/view/zwwu/accueil), [Yawei Li<sup>5</sup>](https://yaweili.bitbucket.io/)$^\dagger$, [Yidi Li<sup>3</sup>](https://liyidi.github.io/), [Danda Pani Paudel<sup>3</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>4</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang <sup>7</sup>](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool <sup>3</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), and [Nicu Sebe <sup>2</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
 
-$\star$: This work was partially conducted during the visiting at INSAIT <br>
+$\star$: This work was partially conducted during the visiting at INSAIT. <br>
 $\dagger$: Corresponding author <br>
 
 <sup>1</sup> University of Trento, Italy, <br>
@@ -15,7 +15,6 @@ $\dagger$: Corresponding author <br>
 <sup>5</sup> ETH Zürich, Switzerland, <br>
 <sup>6</sup> Taiyuan University of Technology, China, <br>
 <sup>7</sup> University of California, Merced, USA <br>
-
 
 [![paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/pdf/2407.13372)
 <!-- [![project](https://img.shields.io/badge/project-page-brightgreen)](https://amazingren.github.io/AnyIR/) -->
@@ -33,13 +32,13 @@ $\dagger$: Corresponding author <br>
   </summary>
 Restoring any degraded image efficiently via just one model has become increasingly significant and impactful, especially with the proliferation of mobile devices. Traditional solutions typically involve training dedicated models per degradation, resulting in inefficiency and redundancy. More recent approaches either introduce additional modules to learn visual prompts - significantly increasing the size of the model - or incorporate cross-modal transfer from large language models trained on vast datasets, adding complexity to the system architecture. In contrast, our approach, termed AnyIR, takes a unified path that leverages inherent similarity across various degradations to enable both efficient and comprehensive restoration through a joint embedding mechanism, without scaling up the model or relying on large language models.
 Specifically, we examine the sub-latent space of each input, identifying key components and reweighting them first in a gated manner. To fuse intrinsic degradation awareness and contextualized attention, a spatial-frequency parallel fusion strategy is proposed to enhance spatially aware local-global interactions and enrich restoration details from the frequency perspective. Extensive benchmarking in the all-in-one restoration setting confirms AnyIR’s SOTA performance, reducing model complexity by around \textbf{82\%} in parameters and \textbf{85\%} in FLOPs compared to the baseline solution. 
-Our code will be available upon acceptance.
+Our code is available via: https://github.com/Amazingren/AnyIR.
 </details>
 
 
 ## Installation
 
-### Environments
+### Environments Setup
 ```
 # Step1: Create the virtual environments via micromamba or conda:
 micromamba create -n anyir python=3.9 -y
@@ -52,23 +51,23 @@ pip install -r requirements.txt
 # Step3: Set cuda
 export LD_LIBRARY_PATH=/opt/modules/nvidia-cuda-11.8/lib64:$LD_LIBRARY_PATH
 export PATH=/opt/modules/nvidia-cuda-11.8/bin:$PATH
-
 ```
 
 
 ### Datasets
-
+TODO
 
 ### Checkpoints Downloads:
-
+TODO
 
 ### Visual Results Downloads:
-
+TODO
 
 ### Training
-
+TODO
 
 ### Evaluation:
+TODO
 (I). 3-Degradation Setting:
 
 (II). 5-Degradation Setting:
@@ -76,8 +75,6 @@ export PATH=/opt/modules/nvidia-cuda-11.8/bin:$PATH
 (III). Mix-Degradation Setting:
 
 (IV). Real-World Setting:
-
-
 
 
 
