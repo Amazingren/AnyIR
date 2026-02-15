@@ -3,10 +3,12 @@
 
 The official PyTorch Implementation of AnyIR for All-in-One Image Restoration
 
-#### [Bin Ren <sup>1,2,3</sup>](https://amazingren.github.io/), [Eduard Zamfir<sup>4</sup>](https://eduardzamfir.github.io), [Zongwei Wu<sup>4</sup>](https://sites.google.com/view/zwwu/accueil), [Yawei Li <sup>4</sup>](https://yaweili.bitbucket.io/), [Yidi Li<sup>3</sup>](https://liyidi.github.io/), [Danda Pani Paudel<sup>3</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>4</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang <sup>7</sup>](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool <sup>3</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), and [Nicu Sebe <sup>2</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
+#### [Bin Ren <sup>1,2,3</sup>](https://amazingren.github.io/)$^\star$, [Eduard Zamfir<sup>4</sup>](https://eduardzamfir.github.io), [Zongwei Wu<sup>4</sup>](https://sites.google.com/view/zwwu/accueil), [Yawei Li<sup>4</sup>](https://yaweili.bitbucket.io/)$^\dagger$, [Yidi Li<sup>3</sup>](https://liyidi.github.io/), [Danda Pani Paudel<sup>3</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>4</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang <sup>7</sup>](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool <sup>3</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), and [Nicu Sebe <sup>2</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
 
-<sup>1</sup> University of Pisa, Italy, <br>
-<sup>2</sup> University of Trento, Italy, <br>
+$\star$: This work was partially conducted during a visit to INSAIT, $\dagger$: Corresponding author <br>
+
+<sup>1</sup> University of Trento, Italy, <br>
+<sup>2</sup> University of Pisa, Italy, <br>
 <sup>3</sup> INSAIT Sofia University, "St. Kliment Ohridski", Bulgaria, <br>
 <sup>4</sup> University of Würzburg, Germany, <br>
 <sup>5</sup> ETH Zürich, Switzerland, <br>
