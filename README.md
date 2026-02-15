@@ -5,7 +5,8 @@ The official PyTorch Implementation of AnyIR for All-in-One Image Restoration
 
 #### [Bin Ren <sup>1,2</sup>](https://amazingren.github.io/)$^\star$, [Eduard Zamfir<sup>4</sup>](https://eduardzamfir.github.io), [Zongwei Wu<sup>4</sup>](https://sites.google.com/view/zwwu/accueil), [Yawei Li<sup>4</sup>](https://yaweili.bitbucket.io/)$^\dagger$, [Yidi Li<sup>3</sup>](https://liyidi.github.io/), [Danda Pani Paudel<sup>3</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>4</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang <sup>7</sup>](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool <sup>3</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), and [Nicu Sebe <sup>2</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
 
-$\star$: This work was partially conducted during a visit to INSAIT, $\dagger$: Corresponding author <br>
+$\star$: This work was partially conducted during the visiting at INSAIT <br>
+$\dagger$: Corresponding author <br>
 
 <sup>1</sup> University of Trento, Italy, <br>
 <sup>2</sup> University of Pisa, Italy, <br>
@@ -17,11 +18,11 @@ $\star$: This work was partially conducted during a visit to INSAIT, $\dagger$: 
 
 
 [![paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/pdf/2407.13372)
-<!-- [![project](https://img.shields.io/badge/project-page-brightgreen)](https://eduardzamfir.github.io/daair/) -->
+<!-- [![project](https://img.shields.io/badge/project-page-brightgreen)](https://amazingren.github.io/AnyIR/) -->
 
 ## Latest
-- `08/01/2025`: Unfortunately, though this work was recommented `Accept` by the AC from the ACM MM2025, while the PC finally reject this work without reason, so this work is still under review. 
-- `07/18/2024`: Repository is created. Our code will be made publicly available upon acceptance. 
+- `02/2026`: 🍺 Our model is released! 
+- `07/2024`: 🎉 Repository is created. Our code will be made publicly available upon acceptance. 
 
 
 ## Method
