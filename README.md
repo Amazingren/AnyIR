@@ -25,7 +25,7 @@ The key idea is efficient spatial-frequency degradation adaptation with compact 
 <p align="center">
   <img src="figs/teaser.png" alt="AnyIR teaser" width="92%">
 </p>
-<p align="center"><i>Teaser: Overall quantitative performance (3-Degradation \& 5-Degradation settings), efficiency comparison, and the qualitative comparison ( Zoom in for a better view).</i></p>
+<p align="center"><i>Teaser: Overall quantitative performance (3-Degradation & 5-Degradation settings), efficiency comparison, and the qualitative comparison ( Zoom in for a better view).</i></p>
 
 
 ## Authors
@@ -50,7 +50,7 @@ $\dagger$: Corresponding author <br>
 <p align="center">
   <img src="figs/framework.png" alt="AnyIR framework" width="92%">
 </p>
-<p align="center"><i>(a) Framework of the proposed {AnyIR}: \ie, a convolutional patch embedding, a U-shape encoder-decoder main body, and an extra refined block. (b) Structure of degradation adaptation block (DAB)..</i></p>
+<p align="center"><i>(a) Framework of the proposed AnyIR: *i.e.*, a convolutional patch embedding, a U-shape encoder-decoder main body, and an extra refined block. (b) Structure of degradation adaptation block (DAB).</i></p>
 
 <details>
   <summary><b>Abstract</b></summary>
