@@ -1,98 +1,180 @@
 # AnyIR
-### Any Image Restoration via Efficient Spatial-Frequency Degradation Adaptation
 
-The official PyTorch Implementation of AnyIR for All-in-One Image Restoration
+<p align="center">
+  <b>Any Image Restoration via Efficient Spatial-Frequency Degradation Adaptation</b><br/>
+  Unified restoration for denoising, deraining, dehazing, deblurring, and low-light enhancement.
+</p>
 
-#### [Bin Ren <sup>1,2</sup>](https://amazingren.github.io/)$^\star$, [Eduard Zamfir<sup>4</sup>](https://eduardzamfir.github.io), [Zongwei Wu<sup>4</sup>](https://sites.google.com/view/zwwu/accueil), [Yawei Li<sup>5</sup>](https://yaweili.bitbucket.io/)$^\dagger$, [Yidi Li<sup>3</sup>](https://liyidi.github.io/), [Danda Pani Paudel<sup>3</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>4</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang <sup>7</sup>](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool <sup>3</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), and [Nicu Sebe <sup>2</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
+<p align="center">
+  <a href="https://arxiv.org/abs/2504.14249"><img src="https://img.shields.io/badge/arXiv-2504.14249-b31b1b.svg" alt="arXiv"></a>
+  <img src="https://img.shields.io/badge/PyTorch-Lightning-792ee5" alt="PyTorch Lightning">
+  <img src="https://img.shields.io/badge/Task-All--in--One%20IR-0ea5e9" alt="All-in-One IR">
+</p>
 
-$\star$: This work was partially conducted during the visiting at INSAIT. <br>
-$\dagger$: Corresponding author <br>
+## Overview
+AnyIR is a single-model framework for **all-in-one image restoration**, designed to handle diverse degradations without training one model per task.  
+The key idea is efficient spatial-frequency degradation adaptation with compact model complexity.
 
-<sup>1</sup> University of Trento, Italy, <br>
-<sup>2</sup> University of Pisa, Italy, <br>
-<sup>3</sup> INSAIT Sofia University, "St. Kliment Ohridski", Bulgaria, <br>
-<sup>4</sup> University of Würzburg, Germany, <br>
-<sup>5</sup> ETH Zürich, Switzerland, <br>
-<sup>6</sup> Taiyuan University of Technology, China, <br>
-<sup>7</sup> University of California, Merced, USA <br>
+### Highlights
+- One model for multiple restoration tasks.
+- Spatial-frequency fusion for robust degradation-aware representation.
+- Strong accuracy-efficiency tradeoff for practical deployment.
 
-[![paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/pdf/2407.13372)
-<!-- [![project](https://img.shields.io/badge/project-page-brightgreen)](https://amazingren.github.io/AnyIR/) -->
+## Authors
+[Bin Ren](https://amazingren.github.io/), [Eduard Zamfir](https://eduardzamfir.github.io), [Zongwei Wu](https://sites.google.com/view/zwwu/accueil), [Yawei Li](https://yaweili.bitbucket.io/), [Yidi Li](https://liyidi.github.io/), [Danda Pani Paudel](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), [Nicu Sebe](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
 
-## Latest
-- `02/2026`: 🍺 Our model is released! 
-- `07/2024`: 🎉 Repository is created. Our code will be made publicly available upon acceptance. 
-
+## News
+- `02/2026`: Model release.
+- `07/2024`: Repository created.
 
 ## Method
-<br>
 <details>
-  <summary>
-  <font size="+1">Abstract</font>
-  </summary>
-Restoring any degraded image efficiently via just one model has become increasingly significant and impactful, especially with the proliferation of mobile devices. Traditional solutions typically involve training dedicated models per degradation, resulting in inefficiency and redundancy. More recent approaches either introduce additional modules to learn visual prompts - significantly increasing the size of the model - or incorporate cross-modal transfer from large language models trained on vast datasets, adding complexity to the system architecture. In contrast, our approach, termed AnyIR, takes a unified path that leverages inherent similarity across various degradations to enable both efficient and comprehensive restoration through a joint embedding mechanism, without scaling up the model or relying on large language models.
-Specifically, we examine the sub-latent space of each input, identifying key components and reweighting them first in a gated manner. To fuse intrinsic degradation awareness and contextualized attention, a spatial-frequency parallel fusion strategy is proposed to enhance spatially aware local-global interactions and enrich restoration details from the frequency perspective. Extensive benchmarking in the all-in-one restoration setting confirms AnyIR’s SOTA performance, reducing model complexity by around \textbf{82\%} in parameters and \textbf{85\%} in FLOPs compared to the baseline solution. 
-Our code is available via: https://github.com/Amazingren/AnyIR.
+  <summary><b>Abstract</b></summary>
+Restoring any degraded image efficiently via just one model has become increasingly significant and impactful, especially with the proliferation of mobile devices. Traditional solutions typically involve training dedicated models per degradation, resulting in inefficiency and redundancy. More recent approaches either introduce additional modules to learn visual prompts or rely on cross-modal transfer from large language models, both increasing complexity. AnyIR takes a unified path: it leverages inherent similarity across degradations via a joint embedding mechanism, without scaling up model size or depending on LLMs. Extensive experiments show state-of-the-art performance in all-in-one restoration while reducing model complexity significantly.
 </details>
 
+## Repository Layout
+```text
+AnyIR/
+├── net/                  # model definitions (AnyIR)
+├── utils/                # datasets, losses, metrics, schedulers
+├── data_dir/             # dataset organization helpers
+├── train.py              # training entry
+├── test.py               # evaluation entry
+├── train_*.sh            # training scripts
+├── test_*.sh             # testing scripts
+└── README.md
+```
 
 ## Installation
-
-### Environments Setup
-```
-# Step1: Create the virtual environments via micromamba or conda:
+### 1) Environment
+```bash
 micromamba create -n anyir python=3.9 -y
-or
+micromamba activate anyir
+# or
 conda create -n anyir python=3.9 -y
-
-# Step2: Prepare PyTorch and other libs
-pip install -r requirements.txt
-
-# Step3: Set cuda
-export LD_LIBRARY_PATH=/opt/modules/nvidia-cuda-11.8/lib64:$LD_LIBRARY_PATH
-export PATH=/opt/modules/nvidia-cuda-11.8/bin:$PATH
+conda activate anyir
 ```
 
+### 2) Dependencies
+```bash
+# NOTE: file in this repo is currently named "requiements.txt"
+pip install -r requiements.txt
+```
 
-### Datasets
-TODO
+### 3) CUDA (if needed on your cluster)
+```bash
+export LD_LIBRARY_PATH=/opt/modules/nvidia-cuda-11.8.0/lib64:$LD_LIBRARY_PATH
+export PATH=/opt/modules/nvidia-cuda-11.8.0/bin:$PATH
+```
 
-### Checkpoints Downloads:
-TODO
+## Data Preparation
+This repo supports two training/evaluation families:
+- `AnyIR` (multi-task restoration benchmarks)
+- `CDD11_*` subsets (combined degradation setting)
 
-### Visual Results Downloads:
-TODO
+Configure dataset roots via CLI arguments in `train.py` / `test.py` (examples below).
 
-### Training
-TODO
+## Training
+### A) 3-degradation setting
+```bash
+python train.py \
+  --trainset AnyIR \
+  --ckpt_dir train_ckpt/3deg \
+  --de_type denoise_15 denoise_25 denoise_50 derain dehaze \
+  --denoise_dir /path/to/Train/Denoise \
+  --derain_dir /path/to/Train/Derain \
+  --dehaze_dir /path/to/Train/Dehaze \
+  --gopro_dir /path/to/Train/Deblur \
+  --enhance_dir /path/to/Train/Enhance \
+  --num_gpus 1 \
+  --batch_size 32 \
+  --epochs 130 \
+  --fft_loss_weight 0.1
+```
 
-### Evaluation:
-TODO
-(I). 3-Degradation Setting:
+### B) 5-degradation setting
+```bash
+python train.py \
+  --trainset AnyIR \
+  --ckpt_dir train_ckpt/5deg \
+  --de_type denoise_15 denoise_25 denoise_50 derain dehaze deblur enhance \
+  --denoise_dir /path/to/Train/Denoise \
+  --derain_dir /path/to/Train/Derain \
+  --dehaze_dir /path/to/Train/Dehaze \
+  --gopro_dir /path/to/Train/Deblur \
+  --enhance_dir /path/to/Train/Enhance \
+  --num_gpus 1 \
+  --batch_size 32 \
+  --epochs 150 \
+  --fft_loss_weight 0.1
+```
 
-(II). 5-Degradation Setting:
+### C) CDD11 setting
+```bash
+python train.py \
+  --trainset CDD11_all \
+  --ckpt_dir train_ckpt/cdd11 \
+  --de_type denoise_15 denoise_25 denoise_50 derain dehaze \
+  --cdd11_path /path/to/cdd11 \
+  --num_gpus 1 \
+  --batch_size 32 \
+  --epochs 200 \
+  --fft_loss_weight 0.1
+```
 
-(III). Mix-Degradation Setting:
+## Evaluation
+### AnyIR test suites
+```bash
+python test.py \
+  --trainset AnyIR \
+  --mode 6 \
+  --denoise_path /path/to/test/denoise \
+  --derain_path /path/to/test/derain \
+  --dehaze_path /path/to/test/dehaze \
+  --gopro_path /path/to/test/deblur \
+  --enhance_path /path/to/test/enhance \
+  --ckpt_name 5deg/epoch=109-step=546700.ckpt \
+  --output_path ./outputs/5deg_test
+```
 
-(IV). Real-World Setting:
+`mode` options in `test.py`:
+- `0`: denoise
+- `1`: derain
+- `2`: dehaze
+- `3`: deblur
+- `4`: enhance
+- `5`: three-task setting
+- `6`: full five-task setting
 
+### CDD11 test
+```bash
+python test.py \
+  --trainset CDD11_low_haze_rain \
+  --cdd11_path /path/to/cdd11 \
+  --ckpt_name cdd11/epoch=154-step=378045.ckpt \
+  --output_path ./output/cdd11/test
+```
 
+## Tips
+- Use the provided `train_*.sh` / `test_*.sh` as cluster templates.
+- Save checkpoints under `train_ckpt/<experiment_name>/` for consistent `test.py --ckpt_name` usage.
+- If you use LPIPS, add `--use_lpips` in `test.py` (slower evaluation).
 
 ## Citation
-
-If you find our work helpful, please consider citing the following paper and/or ⭐ the repo.
-```
+If you find this project useful, please cite:
+```bibtex
 @misc{ren2025any,
-      title={Any Image Restoration via Efficient Spatial-Frequency Degradation Adaptation},
-      author={Ren, Bin and Zamfir, Eduard and Wu, Zongwei and Li, Yawei and Li, Yidi and Paudel, Danda Pani and Timofte, Radu and Yang, Ming-Hsuan and Van Gool, Luc and Sebe, Nicu},
-      year={2025},
-      eprint={2504.14249},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+  title={Any Image Restoration via Efficient Spatial-Frequency Degradation Adaptation},
+  author={Ren, Bin and Zamfir, Eduard and Wu, Zongwei and Li, Yawei and Li, Yidi and Paudel, Danda Pani and Timofte, Radu and Yang, Ming-Hsuan and Van Gool, Luc and Sebe, Nicu},
+  year={2025},
+  eprint={2504.14249},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV}
 }
 ```
 
-
 ## Acknowledgements
-
-This code is built on [PromptIR](https://github.com/va1shn9v/PromptIR) and [AirNet](https://github.com/XLearning-SCU/2022-CVPR-AirNet).
+Built on top of excellent prior work, including:
+- [PromptIR](https://github.com/va1shn9v/PromptIR)
+- [AirNet](https://github.com/XLearning-SCU/2022-CVPR-AirNet)
