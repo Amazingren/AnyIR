@@ -20,6 +20,17 @@ The key idea is efficient spatial-frequency degradation adaptation with compact 
 - Spatial-frequency fusion for robust degradation-aware representation.
 - Strong accuracy-efficiency tradeoff for practical deployment.
 
+## Visual Overview
+<p align="center">
+  <img src="figs/teaser.png" alt="AnyIR teaser" width="92%">
+</p>
+<p align="center"><i>Teaser: AnyIR restores diverse degradations with one unified model.</i></p>
+
+<p align="center">
+  <img src="figs/framework.png" alt="AnyIR framework" width="92%">
+</p>
+<p align="center"><i>Framework: Spatial-frequency degradation adaptation pipeline.</i></p>
+
 ## Authors
 #### [Bin Ren <sup>1,2</sup>](https://amazingren.github.io/)$^\star$, [Eduard Zamfir<sup>4</sup>](https://eduardzamfir.github.io), [Zongwei Wu<sup>4</sup>](https://sites.google.com/view/zwwu/accueil), [Yawei Li<sup>5</sup>](https://yaweili.bitbucket.io/)$^\dagger$, [Yidi Li<sup>3</sup>](https://liyidi.github.io/), [Danda Pani Paudel<sup>3</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>4</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang <sup>7</sup>](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool <sup>3</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), [Nicu Sebe <sup>2</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
 

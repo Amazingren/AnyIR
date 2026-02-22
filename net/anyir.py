@@ -322,7 +322,7 @@ class Attention(nn.Module):
         x_gate = x[:, 1::2, :, :]  # odd channels
 
         # --- Attention path ---
-        b, c, h, w = x_att.shape
+        b, _, h, w = x_att.shape
         qkv = self.qkv_dwconv(self.qkv(x_att))
         q, k, v = qkv.chunk(3, dim=1)
         q = rearrange(q, 'b (head c) h w -> b head c (h w)', head=self.num_heads)
