@@ -4,15 +4,13 @@ Author: Bin Ren
 """
 
 import numbers
-from functools import partial
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from einops import rearrange
-from einops.layers.torch import Rearrange
 from fvcore.nn import FlopCountAnalysis, flop_count_table
-from timm.models.layers import trunc_normal_, DropPath
+from timm.models.layers import DropPath
 
 
 # Constants
@@ -36,7 +34,7 @@ class BiasFree_LayerNorm(nn.Module):
     """Layer normalization without bias."""
     
     def __init__(self, normalized_shape):
-        super(BiasFree_LayerNorm, self).__init__()
+        super().__init__()
         if isinstance(normalized_shape, numbers.Integral):
             normalized_shape = (normalized_shape,)
         normalized_shape = torch.Size(normalized_shape)
@@ -55,7 +53,7 @@ class WithBias_LayerNorm(nn.Module):
     """Layer normalization with bias."""
     
     def __init__(self, normalized_shape):
-        super(WithBias_LayerNorm, self).__init__()
+        super().__init__()
         if isinstance(normalized_shape, numbers.Integral):
             normalized_shape = (normalized_shape,)
         normalized_shape = torch.Size(normalized_shape)
@@ -76,7 +74,7 @@ class LayerNorm(nn.Module):
     """Layer normalization factory that creates either biased or unbiased norm."""
     
     def __init__(self, dim, LayerNorm_type):
-        super(LayerNorm, self).__init__()
+        super().__init__()
         if LayerNorm_type == BIAS_FREE:
             self.body = BiasFree_LayerNorm(dim)
         else:
@@ -92,7 +90,7 @@ class FeedForward(nn.Module):
     """Feed Forward Network with GELU activation and depthwise convolution."""
     
     def __init__(self, dim, ffn_expansion_factor, bias):
-        super(FeedForward, self).__init__()
+        super().__init__()
         
         hidden_features = int(dim * ffn_expansion_factor)
         
@@ -353,7 +351,7 @@ class ResBlock(nn.Module):
     """Residual block with two convolutions."""
     
     def __init__(self, dim):
-        super(ResBlock, self).__init__()
+        super().__init__()
         self.body = nn.Sequential(
             nn.Conv2d(dim, dim, kernel_size=3, stride=1, padding=1, bias=False),
             nn.PReLU(),
@@ -371,7 +369,7 @@ class Downsample(nn.Module):
     """Downsample spatial resolution by 2x and double channels."""
     
     def __init__(self, n_feat):
-        super(Downsample, self).__init__()
+        super().__init__()
         self.body = nn.Sequential(
             nn.Conv2d(n_feat, n_feat//2, kernel_size=3, stride=1, padding=1, bias=False),
             nn.PixelUnshuffle(2)
@@ -385,7 +383,7 @@ class Upsample(nn.Module):
     """Upsample spatial resolution by 2x and halve channels."""
     
     def __init__(self, n_feat):
-        super(Upsample, self).__init__()
+        super().__init__()
         self.body = nn.Sequential(
             nn.Conv2d(n_feat, n_feat*2, kernel_size=3, stride=1, padding=1, bias=False),
             nn.PixelShuffle(2)
@@ -399,7 +397,7 @@ class TransformerBlock(nn.Module):
     """Transformer block with self-attention and feed-forward network."""
     
     def __init__(self, dim, num_heads, ffn_expansion_factor, bias, LayerNorm_type):
-        super(TransformerBlock, self).__init__()
+        super().__init__()
         self.norm1 = LayerNorm(dim, LayerNorm_type)
         self.attn = Attention(dim, num_heads, bias)
         self.norm2 = LayerNorm(dim, LayerNorm_type)
@@ -415,7 +413,7 @@ class OverlapPatchEmbed(nn.Module):
     """Overlapped image patch embedding with 3x3 Conv."""
     
     def __init__(self, in_c=3, embed_dim=48, bias=False):
-        super(OverlapPatchEmbed, self).__init__()
+        super().__init__()
         self.proj = nn.Conv2d(in_c, embed_dim, kernel_size=3, stride=1, padding=1, bias=bias)
 
     def forward(self, x):
@@ -453,109 +451,59 @@ class AnyIR(nn.Module):
         bias=False,
         LayerNorm_type=WITH_BIAS,
     ):
-        super(AnyIR, self).__init__()
+        super().__init__()
+
+        d1, d2, d3, d4 = dim, dim * 2, dim * 4, dim * 8
+
+        def make_stage(stage_dim, stage_heads, stage_blocks):
+            return nn.Sequential(*[
+                TransformerBlock(
+                    dim=stage_dim,
+                    num_heads=stage_heads,
+                    ffn_expansion_factor=ffn_expansion_factor,
+                    bias=bias,
+                    LayerNorm_type=LayerNorm_type
+                )
+                for _ in range(stage_blocks)
+            ])
 
         # Initial feature extraction
         self.patch_embed = OverlapPatchEmbed(inp_channels, dim)
 
         # Encoder path
-        self.encoder_level1 = nn.Sequential(*[
-            TransformerBlock(
-                dim=dim,
-                num_heads=heads[0],
-                ffn_expansion_factor=ffn_expansion_factor,
-                bias=bias,
-                LayerNorm_type=LayerNorm_type
-            ) for _ in range(num_blocks[0])
-        ])
+        self.encoder_level1 = make_stage(d1, heads[0], num_blocks[0])
         
         # Downsampling and level 2 processing
-        self.down1_2 = Downsample(dim)
-        self.encoder_level2 = nn.Sequential(*[
-            TransformerBlock(
-                dim=int(dim*2**1),
-                num_heads=heads[1],
-                ffn_expansion_factor=ffn_expansion_factor,
-                bias=bias,
-                LayerNorm_type=LayerNorm_type
-            ) for _ in range(num_blocks[1])
-        ])
+        self.down1_2 = Downsample(d1)
+        self.encoder_level2 = make_stage(d2, heads[1], num_blocks[1])
         
         # Downsampling and level 3 processing
-        self.down2_3 = Downsample(int(dim*2**1))
-        self.encoder_level3 = nn.Sequential(*[
-            TransformerBlock(
-                dim=int(dim*2**2),
-                num_heads=heads[2],
-                ffn_expansion_factor=ffn_expansion_factor,
-                bias=bias,
-                LayerNorm_type=LayerNorm_type
-            ) for _ in range(num_blocks[2])
-        ])
+        self.down2_3 = Downsample(d2)
+        self.encoder_level3 = make_stage(d3, heads[2], num_blocks[2])
         
         # Downsampling and bottleneck (latent) processing
-        self.down3_4 = Downsample(int(dim*2**2))
-        self.latent = nn.Sequential(*[
-            TransformerBlock(
-                dim=int(dim*2**3),
-                num_heads=heads[3],
-                ffn_expansion_factor=ffn_expansion_factor,
-                bias=bias,
-                LayerNorm_type=LayerNorm_type
-            ) for _ in range(num_blocks[3])
-        ])
+        self.down3_4 = Downsample(d3)
+        self.latent = make_stage(d4, heads[3], num_blocks[3])
         
         # Decoder path
         # Level 4 to 3
-        self.up4_3 = Upsample(int(dim*2**2))
-        self.reduce_chan_level3 = nn.Conv2d(int(dim*2**1)+int(dim*2**2), int(dim*2**2), kernel_size=1, bias=bias)
-        self.reduce_dim_level3 = nn.Conv2d(int(dim*2**3), int(dim*2**2), kernel_size=1, bias=bias)
-        self.decoder_level3 = nn.Sequential(*[
-            TransformerBlock(
-                dim=int(dim*2**2),
-                num_heads=heads[2],
-                ffn_expansion_factor=ffn_expansion_factor,
-                bias=bias,
-                LayerNorm_type=LayerNorm_type
-            ) for _ in range(num_blocks[2])
-        ])
+        self.up4_3 = Upsample(d3)
+        self.reduce_chan_level3 = nn.Conv2d(d2 + d3, d3, kernel_size=1, bias=bias)
+        self.reduce_dim_level3 = nn.Conv2d(d4, d3, kernel_size=1, bias=bias)
+        self.decoder_level3 = make_stage(d3, heads[2], num_blocks[2])
         
         # Level 3 to 2
-        self.up3_2 = Upsample(int(dim*2**2))
-        self.reduce_chan_level2 = nn.Conv2d(int(dim*2**2), int(dim*2**1), kernel_size=1, bias=bias)
-        self.decoder_level2 = nn.Sequential(*[
-            TransformerBlock(
-                dim=int(dim*2**1),
-                num_heads=heads[1],
-                ffn_expansion_factor=ffn_expansion_factor,
-                bias=bias,
-                LayerNorm_type=LayerNorm_type
-            ) for _ in range(num_blocks[1])
-        ])
+        self.up3_2 = Upsample(d3)
+        self.reduce_chan_level2 = nn.Conv2d(d3, d2, kernel_size=1, bias=bias)
+        self.decoder_level2 = make_stage(d2, heads[1], num_blocks[1])
         
         # Level 2 to 1
-        self.up2_1 = Upsample(int(dim*2**1))
-        self.decoder_level1 = nn.Sequential(*[
-            TransformerBlock(
-                dim=int(dim*2**1),
-                num_heads=heads[0],
-                ffn_expansion_factor=ffn_expansion_factor,
-                bias=bias,
-                LayerNorm_type=LayerNorm_type
-            ) for _ in range(num_blocks[0])
-        ])
+        self.up2_1 = Upsample(d2)
+        self.decoder_level1 = make_stage(d2, heads[0], num_blocks[0])
         
         # Final refinement and output
-        self.refinement = nn.Sequential(*[
-            TransformerBlock(
-                dim=int(dim*2**1),
-                num_heads=heads[0],
-                ffn_expansion_factor=ffn_expansion_factor,
-                bias=bias,
-                LayerNorm_type=LayerNorm_type
-            ) for _ in range(num_refinement_blocks)
-        ])
-        self.output = nn.Conv2d(int(dim*2**1), out_channels, kernel_size=3, stride=1, padding=1, bias=bias)
+        self.refinement = make_stage(d2, heads[0], num_refinement_blocks)
+        self.output = nn.Conv2d(d2, out_channels, kernel_size=3, stride=1, padding=1, bias=bias)
 
     def forward(self, inp_img, noise_emb=None):
         """
@@ -589,19 +537,19 @@ class AnyIR(nn.Module):
         # --- Decoder path (upsampling with skip connections)
         # Level 4 to 3
         inp_dec_level3 = self.up4_3(latent)  # [B, dim*4, H/4, W/4]
-        inp_dec_level3 = torch.cat([inp_dec_level3, out_enc_level3], 1)
+        inp_dec_level3 = torch.cat([inp_dec_level3, out_enc_level3], dim=1)
         inp_dec_level3 = self.reduce_chan_level3(inp_dec_level3)
         out_dec_level3 = self.decoder_level3(inp_dec_level3)
         
         # Level 3 to 2
         inp_dec_level2 = self.up3_2(out_dec_level3)  # [B, dim*2, H/2, W/2]
-        inp_dec_level2 = torch.cat([inp_dec_level2, out_enc_level2], 1)
+        inp_dec_level2 = torch.cat([inp_dec_level2, out_enc_level2], dim=1)
         inp_dec_level2 = self.reduce_chan_level2(inp_dec_level2)
         out_dec_level2 = self.decoder_level2(inp_dec_level2)
         
         # Level 2 to 1
         inp_dec_level1 = self.up2_1(out_dec_level2)  # [B, dim*2, H, W]
-        inp_dec_level1 = torch.cat([inp_dec_level1, out_enc_level1], 1)
+        inp_dec_level1 = torch.cat([inp_dec_level1, out_enc_level1], dim=1)
         out_dec_level1 = self.decoder_level1(inp_dec_level1)
         
         # --- Final refinement
