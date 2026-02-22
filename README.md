@@ -24,12 +24,8 @@ The key idea is efficient spatial-frequency degradation adaptation with compact 
 <p align="center">
   <img src="figs/teaser.png" alt="AnyIR teaser" width="92%">
 </p>
-<p align="center"><i>Teaser: AnyIR restores diverse degradations with one unified model.</i></p>
+<p align="center"><i>Teaser: Overall quantitative performance (3-Degradation \& 5-Degradation settings), efficiency comparison, and the qualitative comparison ( Zoom in for a better view).</i></p>
 
-<p align="center">
-  <img src="figs/framework.png" alt="AnyIR framework" width="92%">
-</p>
-<p align="center"><i>Framework: Spatial-frequency degradation adaptation pipeline.</i></p>
 
 ## Authors
 #### [Bin Ren <sup>1,2</sup>](https://amazingren.github.io/)$^\star$, [Eduard Zamfir<sup>4</sup>](https://eduardzamfir.github.io), [Zongwei Wu<sup>4</sup>](https://sites.google.com/view/zwwu/accueil), [Yawei Li<sup>5</sup>](https://yaweili.bitbucket.io/)$^\dagger$, [Yidi Li<sup>3</sup>](https://liyidi.github.io/), [Danda Pani Paudel<sup>3</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>4</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang <sup>7</sup>](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool <sup>3</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), [Nicu Sebe <sup>2</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
@@ -50,6 +46,11 @@ $\dagger$: Corresponding author <br>
 - `07/2024`: Repository created.
 
 ## Method
+<p align="center">
+  <img src="figs/framework.png" alt="AnyIR framework" width="92%">
+</p>
+<p align="center"><i>(a) Framework of the proposed {AnyIR}: \ie, a convolutional patch embedding, a U-shape encoder-decoder main body, and an extra refined block. (b) Structure of degradation adaptation block (DAB)..</i></p>
+
 <details>
   <summary><b>Abstract</b></summary>
 Restoring any degraded image efficiently via just one model has become increasingly significant and impactful, especially with the proliferation of mobile devices. Traditional solutions typically involve training dedicated models per degradation, resulting in inefficiency and redundancy. More recent approaches either introduce additional modules to learn visual prompts or rely on cross-modal transfer from large language models, both increasing complexity. AnyIR takes a unified path: it leverages inherent similarity across degradations via a joint embedding mechanism, without scaling up model size or depending on LLMs. Extensive experiments show state-of-the-art performance in all-in-one restoration while reducing model complexity significantly.
