@@ -43,10 +43,10 @@ $\dagger$: Corresponding author <br>
 <sup>7</sup> University of California, Merced, USA <br>
 
 ## News
-- [ ] Projectpage update
-- [ ] Ckpts release
+- [ ] Projectpage update.
+- [ ] Ckpts release.
 - [ ] Main visual results release
-- [x] `02/2026`: Model (i.e. code) released.
+- [x] `02/2026`: Model (i.e., code) released.
 - [x] `07/2024`: Repository created.
 
 ## Method
