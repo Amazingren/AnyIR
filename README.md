@@ -34,12 +34,12 @@ The key idea is efficient spatial-frequency degradation adaptation with compact 
 $\star$: This work was partially conducted during the visiting at INSAIT. <br>
 $\dagger$: Corresponding author <br>
 
-<sup>1</sup> University of Trento, IT, <br>
-<sup>2</sup> Mohamed bin Zayed University of Artificial Intelligence, UAE, <br>
-<sup>3</sup> University of Würzburg, DE, <br>
-<sup>4</sup> ETH Zürich, CH, <br>
-<sup>5</sup> Taiyuan University of Technology, CN, <br>
-<sup>6</sup> INSAIT Sofia University, "St. Kliment Ohridski", BG, <br>
+<sup>1</sup> University of Trento, IT <br>
+<sup>2</sup> Mohamed bin Zayed University of Artificial Intelligence, UAE <br>
+<sup>3</sup> University of Würzburg, DE <br>
+<sup>4</sup> ETH Zürich, CH <br>
+<sup>5</sup> Taiyuan University of Technology, CN <br>
+<sup>6</sup> INSAIT Sofia University, "St. Kliment Ohridski", BG <br>
 <sup>7</sup> University of California, Merced, USA <br>
 
 ## News
