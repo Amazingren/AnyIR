@@ -29,11 +29,10 @@ The key idea is efficient spatial-frequency degradation adaptation with compact 
 
 
 ## Authors
-#### [Bin Ren <sup>1,2</sup>](https://amazingren.github.io/)$^\star$, [Eduard Zamfir<sup>3</sup>](https://eduardzamfir.github.io), [Zongwei Wu<sup>3</sup>](https://sites.google.com/view/zwwu/accueil), [Yawei Li<sup>4</sup>](https://yaweili.bitbucket.io/)$^\dagger$, [Yidi Li<sup>5</sup>](https://liyidi.github.io/), [Danda Pani Paudel<sup>6</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>3</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang <sup>7</sup>](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool <sup>6</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), [Nicu Sebe <sup>1</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
+#### [Bin Ren <sup>1,2</sup>](https://amazingren.github.io/)$^\star$, [Eduard Zamfir<sup>3</sup>](https://eduardzamfir.github.io), [Zongwei Wu<sup>3</sup>](https://sites.google.com/view/zwwu/accueil)$^\dagger$, [Yawei Li<sup>4</sup>](https://yaweili.bitbucket.io/)$^\dagger$, [Yidi Li<sup>5</sup>](https://liyidi.github.io/), [Danda Pani Paudel<sup>6</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>3</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang <sup>7</sup>](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool <sup>6</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), [Nicu Sebe <sup>1</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
 
-$\star$: This work was partially conducted during the visiting at INSAIT. <br>
-<!-- $^\dagger$ -->
-<!-- $\dagger$: Corresponding author <br> -->
+$\star$: This work was partially conducted during the visiting stay at INSAIT. <br>
+$\dagger$: Corresponding author <br>
 
 <sup>1</sup> University of Trento, IT <br>
 <sup>2</sup> Mohamed bin Zayed University of Artificial Intelligence, UAE <br>
@@ -55,7 +54,7 @@ $\star$: This work was partially conducted during the visiting at INSAIT. <br>
 
 <details>
   <summary><b>Abstract</b></summary>
-Restoring any degraded image efficiently via just one model has become increasingly significant and impactful, especially with the proliferation of mobile devices. Traditional solutions typically involve training dedicated models per degradation, resulting in inefficiency and redundancy. More recent approaches either introduce additional modules to learn visual prompts or rely on cross-modal transfer from large language models, both increasing complexity. AnyIR takes a unified path: it leverages inherent similarity across degradations via a joint embedding mechanism, without scaling up model size or depending on LLMs. Extensive experiments show state-of-the-art performance in all-in-one restoration while reducing model complexity significantly.
+Restoring multiple degradations efficiently via just one model has become increasingly significant and impactful, especially with the proliferation of mobile devices. Traditional solutions typically involve training dedicated models per degradation, resulting in inefficiency and redundancy. More recent approaches either introduce additional modules to learn visual prompts, significantly increasing the size of the model, or incorporate cross-modal transfer from large language models trained on vast datasets, adding complexity to the system architecture. In contrast, our approach, termed AnyIR, takes a unified path that leverages inherent similarity across various degradations to enable both efficient and comprehensive restoration through a joint embedding mechanism, without scaling up the model or relying on large language models. Specifically, we examine the sub-latent space of each input, identifying key components and reweighting them first in a gated manner.  To unify intrinsic degradation awareness with contextualized attention, we propose a spatial–frequency parallel fusion strategy that strengthens spatially informed local–global interactions and enriches restoration fidelity from the frequency domain. Comprehensive evaluations across four all-in-one restoration benchmarks demonstrate that AnyIR attains state-of-the-art performance while reducing model parameters by 84% and FLOPs by 80% relative to the baseline. These results highlight the potential of AnyIR as an effective and lightweight solution for further all-in-one image restoration. Our code is available at: https://github.com/Amazingren/AnyIR.
 </details>
 
 ## Repository Layout
