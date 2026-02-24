@@ -29,17 +29,17 @@ The key idea is efficient spatial-frequency degradation adaptation with compact 
 
 
 ## Authors
-#### [Bin Ren <sup>1,2</sup>](https://amazingren.github.io/)$^\star$, [Eduard Zamfir<sup>4</sup>](https://eduardzamfir.github.io), [Zongwei Wu<sup>4</sup>](https://sites.google.com/view/zwwu/accueil), [Yawei Li<sup>5</sup>](https://yaweili.bitbucket.io/)$^\dagger$, [Yidi Li<sup>3</sup>](https://liyidi.github.io/), [Danda Pani Paudel<sup>3</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>4</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang <sup>7</sup>](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool <sup>3</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), [Nicu Sebe <sup>2</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
+#### [Bin Ren <sup>1,2</sup>](https://amazingren.github.io/)$^\star$, [Eduard Zamfir<sup>3</sup>](https://eduardzamfir.github.io), [Zongwei Wu<sup>3</sup>](https://sites.google.com/view/zwwu/accueil), [Yawei Li<sup>4</sup>](https://yaweili.bitbucket.io/)$^\dagger$, [Yidi Li<sup>5</sup>](https://liyidi.github.io/), [Danda Pani Paudel<sup>6</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>3</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang <sup>7</sup>](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool <sup>6</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), [Nicu Sebe <sup>1</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
 
 $\star$: This work was partially conducted during the visiting at INSAIT. <br>
 $\dagger$: Corresponding author <br>
 
-<sup>1</sup> University of Trento, Italy, <br>
-<sup>2</sup> University of Pisa, Italy, <br>
-<sup>3</sup> INSAIT Sofia University, "St. Kliment Ohridski", Bulgaria, <br>
-<sup>4</sup> University of Würzburg, Germany, <br>
-<sup>5</sup> ETH Zürich, Switzerland, <br>
-<sup>6</sup> Taiyuan University of Technology, China, <br>
+<sup>1</sup> University of Trento, IT, <br>
+<sup>2</sup> Mohamed bin Zayed University of Artificial Intelligence, UAE, <br>
+<sup>3</sup> University of Würzburg, DE, <br>
+<sup>4</sup> ETH Zürich, CH, <br>
+<sup>5</sup> Taiyuan University of Technology, CN, <br>
+<sup>6</sup> INSAIT Sofia University, "St. Kliment Ohridski", BG, <br>
 <sup>7</sup> University of California, Merced, USA <br>
 
 ## News
