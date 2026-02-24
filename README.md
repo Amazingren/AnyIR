@@ -29,7 +29,7 @@ The key idea is efficient spatial-frequency degradation adaptation with compact 
 
 
 ## Authors
-#### [Bin Ren <sup>1,2</sup>](https://amazingren.github.io/)$^\star$, [Eduard Zamfir<sup>3</sup>](https://eduardzamfir.github.io), [Zongwei Wu<sup>3</sup>](https://sites.google.com/view/zwwu/accueil)$^\dagger$, [Yawei Li<sup>4</sup>](https://yaweili.bitbucket.io/)$^\dagger$, [Yidi Li<sup>5</sup>](https://liyidi.github.io/), [Danda Pani Paudel<sup>6</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>3</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang <sup>7</sup>](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool <sup>6</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), [Nicu Sebe <sup>1</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
+#### [Bin Ren <sup>1,2</sup>](https://amazingren.github.io/)$^\star$, [Eduard Zamfir<sup>3</sup>](https://eduardzamfir.github.io), [Zongwei Wu<sup>3</sup>](https://sites.google.com/view/zwwu/accueil)$^\dagger$, [Yawei Li<sup>4</sup>](https://yaweili.bitbucket.io/), [Yidi Li<sup>5</sup>](https://liyidi.github.io/), [Danda Pani Paudel<sup>6</sup>](https://people.ee.ethz.ch/~paudeld/), [Radu Timofte <sup>3</sup>](https://www.informatik.uni-wuerzburg.de/computervision/), [Ming-Hsuan Yang <sup>7</sup>](https://scholar.google.com/citations?user=p9-ohHsAAAAJ&hl=en), [Luc Van Gool <sup>6</sup>](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), [Nicu Sebe <sup>1</sup>](https://scholar.google.com/citations?user=stFCYOAAAAAJ&hl=en)
 
 $\star$: This work was partially conducted during the visiting stay at INSAIT. <br>
 $\dagger$: Corresponding author <br>
@@ -43,8 +43,11 @@ $\dagger$: Corresponding author <br>
 <sup>7</sup> University of California, Merced, USA <br>
 
 ## News
-- `02/2026`: Model release.
-- `07/2024`: Repository created.
+- [ ] Projectpage update
+- [ ] Ckpts release
+- [ ] Main visual results release
+- [x] `02/2026`: Model (i.e. code) released.
+- [x] `07/2024`: Repository created.
 
 ## Method
 <p align="center">
@@ -199,7 +202,7 @@ If you find this project useful, please cite:
 ```
 
 ## Acknowledgements
-[TBD] This work was partially supported by the FIS project GUIDANCE (Debugging Computer Vision Models via Controlled Cross-modal Generation) (No. FIS2023-03251) and the Alexander von Humboldt Foundation.
+This work was partially supported by the FIS project GUIDANCE (Debugging Computer Vision Models via Controlled Cross-modal Generation) (No. FIS2023-03251), the Alexander von Humboldt Foundation, and the National Natural Science Foundation of China (62403345).
 
 The code base is built on top of excellent prior work, including:
 - [PromptIR](https://github.com/va1shn9v/PromptIR)
