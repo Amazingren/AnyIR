@@ -146,7 +146,7 @@ python train.py \
   --cdd11_path /path/to/cdd11 \
   --num_gpus 1 \
   --batch_size 32 \
-  --epochs 200 \
+  --epochs 170 \
   --fft_loss_weight 0.1
 ```
 
